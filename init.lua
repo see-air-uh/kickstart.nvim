@@ -623,7 +623,24 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        gopls = {},
+        gopls = {
+          cmd = { 'gopls' },
+          filetypes = { 'go', 'gomod', 'gowork', 'gotmpl' },
+          settings = {
+            gopls = {
+              analyses = {
+                unusedparams = true, -- Enable the unusedparams analysis
+                shadow = true, -- Enable the shadow analysis
+              },
+              staticcheck = true, -- Enable staticcheck for linting
+              gofumpt = true, -- Use gofumpt for formatting
+              hoverKind = 'Full', -- Use "Full" hover details
+              linksInHover = true, -- Enable links in hover documentation
+              usePlaceholders = true, -- Use placeholders in signature help
+              diagnosticsDelay = '500ms', -- Delay diagnostics slightly for performance
+            },
+          },
+        },
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
